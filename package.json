@@ -46,6 +46,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "tsc:build": "tsc -p tsconfig.json",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -68,10 +69,11 @@
     ]
   },
   "devDependencies": {
-    "@commitlint/cli": "^12.0.1",
-    "@commitlint/config-conventional": "^12.0.1",
+    "@commitlint/cli": "11.0.0",
+    "@commitlint/config-conventional": "11.0.0",
     "babel-plugin-styled-components": "^1.12.0",
     "commitizen": "^4.2.3",
+    "cz-conventional-changelog": "3.3.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "husky": "^5.2.0",
