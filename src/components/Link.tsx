@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import type {IconType} from 'react-icons';
 import {HEX} from '../elements/bar';
 
-type LinkProps = {
+export type LinkProps = {
   color?: string | HEX;
   to?: string;
   icon: keyof typeof FontAwesome;
