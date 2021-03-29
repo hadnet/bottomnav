@@ -24,7 +24,7 @@ export const Item = styled.li<ItemProps>`
         color: white;
       }
       & ~ div {
-        transform: translateX(calc(70px * ${tag}));
+        transform: translateX(calc(70px * ${tag})) !important;
       }
     `}
 `;

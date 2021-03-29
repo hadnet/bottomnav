@@ -6,5 +6,6 @@ export const List = styled.ul`
   left: 0;
   width: 100%;
   display: flex;
+  transition: 0.5s;
 `;
 List.displayName = 'List';

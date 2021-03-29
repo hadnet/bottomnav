@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {createGlobalStyle} from 'styled-components';
-import {Bar} from './elements/bar';
+import * as ReactIcons from 'react-icons/all';
+import {Bar, HEX} from './elements/bar';
 import {List} from './elements/list';
 import {Item} from './elements/item';
 import {Indicator} from './elements/indicator';
-import {Link} from './components/Link';
+import {Icon, Link} from './components/Link';
 import {Option, OptionProps} from './components/Option';
+import {IconType} from 'react-icons';
 
 const GlobalStyle = createGlobalStyle`
  * {
@@ -24,25 +26,35 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 type BottomNavPros = {
+  color?: string | HEX;
+  bgColor?: string | HEX;
+  icon: keyof typeof ReactIcons;
   children?: React.ReactNode;
 };
 
-function BottomNav({children}: BottomNavPros) {
+function BottomNav({children, icon}: BottomNavPros) {
   const [active, setActive] = useState(0);
+  const getSize = React.useMemo(() => React.Children.count(children), [children]);
+  const ReactIcon: IconType = ReactIcons[icon];
   return (
     <>
       <GlobalStyle />
-      <Bar bgColor="gold">
+      <Bar bgColor="gold" size={getSize}>
         <List>
           {React.Children.map(children as React.ReactElement<OptionProps>, (child, idx) => {
             return React.cloneElement(child, undefined, [
-              <Item tag={idx} active={active} onMouseOver={() => setActive(idx)}>
-                <Link icon={child.props.icon}>{child.props.title}</Link>
+              <Item key={idx} tag={idx} active={active} onMouseOver={() => setActive(idx)}>
+                <Link icon={child.props.icon} to={child.props.to}>
+                  {child.props.title}
+                </Link>
               </Item>,
             ]);
           })}
           <Indicator />
         </List>
+        <Icon>
+          <ReactIcon color={'#D48C00'} />
+        </Icon>
       </Bar>
     </>
   );
@@ -50,12 +62,10 @@ function BottomNav({children}: BottomNavPros) {
 
 function App() {
   return (
-    <BottomNav>
+    <BottomNav icon={`FaEllipsisV`}>
       <Option title="Home" icon={'FaHome'} to={'/home'} />
       <Option title="Settings" icon={'FaCog'} to={'/settings'} />
       <Option title="Message" icon={'FaFacebookMessenger'} to={'/location'} />
-      <Option title="Favorites" icon={'FaHeart'} to={'/favorites'} />
-      <Option title="Profile" icon={'FaUserAlt'} to={'/profile'} />
     </BottomNav>
   );
 }

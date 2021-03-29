@@ -48,7 +48,7 @@ const Title = styled.span`
 `;
 Title.displayName = 'Title';
 
-const Icon = styled.span`
+export const Icon = styled.span`
   font-size: 24px;
   position: relative;
   display: block;
